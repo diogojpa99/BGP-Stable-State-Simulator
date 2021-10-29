@@ -1,0 +1,12 @@
+
+[Destiny_id: 100]->[Orig_id:100|type:0|cost:0]->[Orig_id:600|type:3|cost:1]->[Orig_id:200|type:3|cost:1]->[Orig_id:300|type:3|cost:2]->[Orig_id:400|type:3|cost:2]->[Orig_id:500|type:3|cost:3]->NULL
+
+[Destiny_id: 600]->[Orig_id:100|type:1|cost:1]->[Orig_id:600|type:0|cost:0]->[Orig_id:200|type:1|cost:3]->[Orig_id:300|type:3|cost:4]->[Orig_id:400|type:1|cost:2]->[Orig_id:500|type:1|cost:1]->NULL
+
+[Destiny_id: 200]->[Orig_id:100|type:1|cost:1]->[Orig_id:600|type:3|cost:2]->[Orig_id:200|type:0|cost:0]->[Orig_id:300|type:3|cost:1]->[Orig_id:400|type:3|cost:1]->[Orig_id:500|type:3|cost:2]->NULL
+
+[Destiny_id: 300]->[Orig_id:100|type:1|cost:2]->[Orig_id:600|type:3|cost:3]->[Orig_id:200|type:1|cost:1]->[Orig_id:300|type:0|cost:0]->[Orig_id:400|type:3|cost:2]->[Orig_id:500|type:3|cost:3]->NULL
+
+[Destiny_id: 400]->[Orig_id:100|type:1|cost:2]->[Orig_id:600|type:3|cost:2]->[Orig_id:200|type:1|cost:1]->[Orig_id:300|type:3|cost:2]->[Orig_id:400|type:0|cost:0]->[Orig_id:500|type:3|cost:1]->NULL
+
+[Destiny_id: 500]->[Orig_id:100|type:1|cost:3]->[Orig_id:600|type:3|cost:1]->[Orig_id:200|type:1|cost:2]->[Orig_id:300|type:3|cost:3]->[Orig_id:400|type:1|cost:1]->[Orig_id:500|type:0|cost:0]->NULL

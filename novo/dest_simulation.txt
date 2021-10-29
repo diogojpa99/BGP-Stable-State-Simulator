@@ -1,0 +1,12 @@
+
+[100]->[dest_id:500|type:1|cost:3]->[dest_id:400|type:1|cost:2]->[dest_id:300|type:1|cost:2]->[dest_id:200|type:1|cost:1]->[dest_id:600|type:1|cost:1]->[dest_id:100|type:0|cost:0]->NULL
+
+[600]->[dest_id:500|type:3|cost:1]->[dest_id:400|type:3|cost:2]->[dest_id:300|type:3|cost:3]->[dest_id:200|type:3|cost:2]->[dest_id:600|type:0|cost:0]->[dest_id:100|type:3|cost:1]->NULL
+
+[200]->[dest_id:500|type:1|cost:2]->[dest_id:400|type:1|cost:1]->[dest_id:300|type:1|cost:1]->[dest_id:200|type:0|cost:0]->[dest_id:600|type:1|cost:3]->[dest_id:100|type:3|cost:1]->NULL
+
+[300]->[dest_id:500|type:3|cost:3]->[dest_id:400|type:3|cost:2]->[dest_id:300|type:0|cost:0]->[dest_id:200|type:3|cost:1]->[dest_id:600|type:3|cost:4]->[dest_id:100|type:3|cost:2]->NULL
+
+[400]->[dest_id:500|type:1|cost:1]->[dest_id:400|type:0|cost:0]->[dest_id:300|type:3|cost:2]->[dest_id:200|type:3|cost:1]->[dest_id:600|type:1|cost:2]->[dest_id:100|type:3|cost:2]->NULL
+
+[500]->[dest_id:500|type:0|cost:0]->[dest_id:400|type:3|cost:1]->[dest_id:300|type:3|cost:3]->[dest_id:200|type:3|cost:2]->[dest_id:600|type:1|cost:1]->[dest_id:100|type:3|cost:3]->NULL
