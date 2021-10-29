@@ -99,8 +99,16 @@ Event *createEvent(Event *event_head, Nodes *node_orig, int woken_node_id, Adj *
 		return event_head;
     }
     
-    new_event->An = Dn + Sn;//o instante do evento quee estamos a criar é o instante do calendário mais a tempo aleatório com a componente fixa de 1
-    if (new_event->An < adj->An) new_event->An = adj->An;  //Tratar da fila de espera de cada ligação    
+    //O instante do evento quee estamos a criar é o instante do calendário mais a tempo aleatório com a componente fixa de 1
+    new_event->An = Dn + Sn;
+
+    //Fila de espera de cada ligação    
+    if (new_event->An < adj->An) { 
+        new_event->An = adj->An; 
+    } else{
+        adj->An = new_event->An;
+    }
+
     new_event->origin_node = node_orig->id; // nó que está a enviar a sms
     new_event->dest_node = adj->id; // nó a quem se destina a sms
     new_event->dest_node_pointer=adj->node_pointer;

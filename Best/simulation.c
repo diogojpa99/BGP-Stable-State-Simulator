@@ -18,9 +18,8 @@ extern int *types;
 void simulations(Nodes *nodes_head, Event *event_head){
     
     Nodes *auxT = NULL; 
-    int i = 1;
 
-    times_simulations = (int*)calloc(nr_nodes, sizeof(int));
+    times_simulations = (int*)calloc(1024, sizeof(int));
     if(times_simulations == NULL){
         printf("Error: Could not allocate memory for times_simulations");
     }
@@ -33,14 +32,15 @@ void simulations(Nodes *nodes_head, Event *event_head){
         Dn = 0;
         //printf("\n ------------ Awaken node: %d -------------- \n", nodes_head->id);
         processCalendar(event_head, auxT, nodes_head);
-        times_simulations[0] = Dn;
+        times_simulations[Dn] = times_simulations[Dn] +1;
+        CleanAns(nodes_head);
         while( auxT->next != NULL){
             Dn = 0;
             auxT = auxT->next;
             //printf("\n ------------ Awaken node: %d -------------- \n", auxT->id);
             processCalendar(event_head, auxT, nodes_head);
-            times_simulations[i] = Dn;
-            i++;
+            times_simulations[Dn] = times_simulations[Dn] +1;
+            CleanAns(nodes_head);
         }
     }
 
@@ -80,3 +80,20 @@ void UpdateTypesCosts(Nodes *nodes_head)
     return;
 }
 
+void CleanAns(Nodes *listHead){
+    
+    Nodes *nodes_auxT;
+    Adj *adj_auxT;
+
+    if(listHead==NULL){
+        return;
+    }else{
+        for(nodes_auxT = listHead; nodes_auxT != NULL; nodes_auxT = nodes_auxT->next) {
+            for(adj_auxT = nodes_auxT->adjHead; adj_auxT != NULL; adj_auxT = adj_auxT->next) {
+                adj_auxT->An=0;
+            }
+        }
+    }
+
+    return;
+}

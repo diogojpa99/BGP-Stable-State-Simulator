@@ -109,6 +109,7 @@ int main(int argc, char **argv)
             //Print_List_of_Destinations(nodes_head, simulation);
             write_times();
             writeStatistics();
+            printf("1\n");
             break;
 
         case interactive_algo:
@@ -142,9 +143,12 @@ int main(int argc, char **argv)
 
     //freeEventsNodes(eventHead);
     clearAllDest(nodes_head);
+    printf("2\n");
     freeGraphNodes(nodes_head);
     fclose(fp);
     free(times_simulations);
+    free(types);
+    free(costs);
     return 0;
 }
 
@@ -179,7 +183,7 @@ void write_times()
     FILE *fp;
     int i;
 
-    fp = fopen("times_simulations.txt","w");
+    fp = fopen("times.txt","w");
     
 
     for(i = 0; i < nr_nodes; i++){

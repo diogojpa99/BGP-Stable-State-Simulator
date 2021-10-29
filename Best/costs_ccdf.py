@@ -4,7 +4,7 @@ import pandas as pd
 
 
 
-data = np.loadtxt("costs_algorithm.txt")
+data = np.loadtxt("costs.txt")
 
 print(data.shape)
 
