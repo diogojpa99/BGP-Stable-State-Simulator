@@ -32,7 +32,7 @@ void Algorithm(Nodes *nodes_head)
         //printf("\n ------------ Awaken node: %d -------------- \n", nodes_head->id);
         //printf("\n ------------ %d -------------- \n", i);
         initAlgorithm(nodes_head, auxT);
-        ReverseDijkstra(nodes_head, auxT);
+        ReverseDijkstra(nodes_head, auxT, 0);
         //UpdateTypesCosts(nodes_head);
         //Print_Destinations(nodes_head,fd);
         while (auxT->next != NULL)
@@ -40,7 +40,7 @@ void Algorithm(Nodes *nodes_head)
             auxT = auxT->next;
             //printf("\n ------------ Awaken node: %d -------------- \n", auxT->id);
             //printf("\n ------------ %d -------------- \n", i);
-            ReverseDijkstra(nodes_head, auxT);
+            ReverseDijkstra(nodes_head, auxT, 0);
             //UpdateTypesCosts(nodes_head);
             //Print_Destinations(nodes_head,fd);
             i++;
@@ -51,15 +51,22 @@ void Algorithm(Nodes *nodes_head)
     return;
 }
 
-void ReverseDijkstra(Nodes *nodes_head, Nodes *destiny_node)
+//Reverse Dijkstra
+//Deveria ser reverse Bellman-Ford
+//variável mode: define se o modo é interativo ou normal
+
+void ReverseDijkstra(Nodes *nodes_head, Nodes *destiny_node, int mode)
 {
 
-    Queue *Q = NULL, *Q_1 = NULL, *Q_2 = NULL, *Q_3 = NULL; //Vão ser heaps ou listas normais ??
-    /* Q_1, Q_2, Q_3 representam as cabeças de cada uma das filas ordenadas */
+    Queue *Q = NULL, *Q_1 = NULL, *Q_2 = NULL, *Q_3 = NULL; /* Q_1, Q_2, Q_3 representam as cabeças de cada uma das filas ordenadas */
     Queue *last_Q1=NULL, *last_Q2=NULL, *last_Q3=NULL;
 
     //Iniciar o Reverse Dijkstra
-    nodes_head = initReverseDijkstra(nodes_head, destiny_node);
+    if(mode == 0){
+        nodes_head = initReverseDijkstra(nodes_head, destiny_node);
+    } else if ( mode == 1){
+        initAlgorithm(nodes_head, destiny_node);
+    }
 
     //Colocar o destino na pilha com custo zero
     Q_1 = InsertInLast(destiny_node, Q_1,&last_Q1);

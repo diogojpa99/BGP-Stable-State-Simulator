@@ -23,7 +23,8 @@ int main(int argc, char **argv)
     char buffer[128];
     int input_dest_id, input_origin_id;
 
-    Nodes *nodes_head = NULL;
+    Nodes *nodes_head = NULL, *interactive_orig_node=NULL, *interactive_dest_node=NULL;
+    DestNode *interactive_dest=NULL;
     Event *event_head = NULL;
     
     char file[128];
@@ -87,10 +88,18 @@ int main(int argc, char **argv)
     {
         case interactive_sim:
             /*tem que dar como output o tipo e o comprimento da rota entre um destino e uma source dados na funcao commandLineValidation*/
-            //InteractiveMode(nodes_head);
+            interactive_dest_node = InteractiveMode(nodes_head, &interactive_orig_node);
             printf("------------ The simulation has started ------------ \n");
-            simulations(nodes_head, event_head);
+            processCalendar(event_head, interactive_dest_node, nodes_head);
             printf("------------ The simulation has Ended -------------- \n");
+            interactive_dest = searchDestiny(interactive_dest_node->destHead, interactive_dest_node->id);
+
+            if(interactive_orig_node->destHead == NULL){
+                printf("The source node %d can't reach that destiny \n", interactive_orig_node->id);
+            } else{
+                printf("Node %d can reach node %d with: TYPE:%d  &  COST:%d\n", interactive_orig_node->id, interactive_dest->dest_id, interactive_orig_node->destHead->type, interactive_orig_node->destHead->cost );
+            }
+            
             break;
 
         case simulation:
@@ -103,10 +112,17 @@ int main(int argc, char **argv)
             break;
 
         case interactive_algo:
-            //InteractiveMode(nodes_head);
+            interactive_dest_node = InteractiveMode(nodes_head, &interactive_orig_node);
             printf("------------ The algorithm has started ------------ \n");
-            Algorithm(nodes_head);
+            ReverseDijkstra(nodes_head, interactive_dest_node,1);
             printf("------------ The algorithm has Ended -------------- \n");
+            
+            if(interactive_orig_node->destHead->type == INFINITE){
+                printf("The source node %d can't reach that destiny \n", interactive_orig_node->id);
+            } else{
+                printf("Node %d can reach node %d with: TYPE:%d  &  COST:%d\n", interactive_orig_node->id, interactive_dest_node->id, interactive_orig_node->destHead->type, interactive_orig_node->destHead->cost );
+            }
+            
             break;
 
         case algorithm:
@@ -203,18 +219,17 @@ void write_types_costs_routs(Nodes *nodes_head, int mode)
     return;
 }
 
-void InteractiveMode(Nodes *nodes_head){
+Nodes *InteractiveMode(Nodes *nodes_head, Nodes **interactive_orig_node){
 
-    Nodes *node;
-    DestNode *dest;
+    Nodes *node, *dest;
     int source_node_id, dest_node_id;
-    char buffer_source[128], buffer_dest[128], garbage[128];
+    char buffer_source[128], buffer_dest[128];
 
     printf("\nWelcome to interactive mode!\n");
 
     printf("Please insert source node: "); fflush(stdout);
     if(fgets(buffer_source, 128, stdin)!=NULL){
-        while(sscanf(buffer_source, "%d%s", &source_node_id, garbage)!=1){
+        while(sscanf(buffer_source, "%d", &source_node_id)!=1){
             printf("Please insert an integer: "); fflush(stdout);
             fgets(buffer_source, 128, stdin);
         }
@@ -222,7 +237,7 @@ void InteractiveMode(Nodes *nodes_head){
             printf("Sorry but that source node does not exists in this network\n"); 
             printf("Please insert source node: "); fflush(stdout);
             if(fgets(buffer_source, 128, stdin)!=NULL){
-                while(sscanf(buffer_source, "%d%s", &source_node_id, garbage)!=1){
+                while(sscanf(buffer_source, "%d", &source_node_id)!=1){
                     printf("Please insert an integer: "); fflush(stdout);
                     fgets(buffer_source, 128, stdin);
                 }
@@ -240,13 +255,10 @@ void InteractiveMode(Nodes *nodes_head){
         }
     }
 
-    if( ((dest = searchDestiny(node->destHead,dest_node_id)) == NULL) || (dest->type==1000000)){
-        printf("The source node %d can't reach that destiny \n", source_node_id);
-    } else{
-        printf("Node %d can reach node %d with: TYPE:%d  &  COST:%d\n", source_node_id, dest_node_id,dest->type,dest->cost);
-    }
+    dest = searchNodesList(nodes_head,dest_node_id);
+    *interactive_orig_node = node;
 
-    return;
+    return dest;
 }
 
 

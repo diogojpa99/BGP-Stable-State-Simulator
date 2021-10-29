@@ -83,7 +83,7 @@ void write_times();
 
 void write_types_costs_routs(Nodes *nodes_head, int mode);
 
-void InteractiveMode(Nodes *nodes_head);
+Nodes *InteractiveMode(Nodes *nodes_head, Nodes **interactive_orig_node);
 
 void writeStatistics();
 

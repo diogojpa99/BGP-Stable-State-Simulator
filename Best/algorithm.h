@@ -5,7 +5,7 @@
 
 void Algorithm(Nodes *nodes_head);
 
-void ReverseDijkstra(Nodes *nodes_head, Nodes *destiny_node);
+void ReverseDijkstra(Nodes *nodes_head, Nodes *destiny_node, int mode);
 
 Nodes *initAlgorithm(Nodes *list_head, Nodes *destiny_node);
 
