@@ -10,15 +10,16 @@ void Algorithm(Nodes *nodes_head)
 {
 
     Nodes *auxT = NULL;
-    FILE *fd;
+    //FILE *fd;
     int i=1;
 
     costs[0] = 0;
+    /*
     if ((fd = fopen("dest_algorithmNOVO.txt", "w")) == NULL)
     {
         printf("Error: Could not open file \n");
         exit(0);
-    }
+    }*/
 
     if (nodes_head == NULL)
     {
@@ -32,7 +33,7 @@ void Algorithm(Nodes *nodes_head)
         initAlgorithm(nodes_head, auxT);
         ReverseDijkstra(nodes_head, auxT);
         //UpdateTypesCosts(nodes_head);
-        Print_Destinations(nodes_head,fd);
+        //Print_Destinations(nodes_head,fd);
         while (auxT->next != NULL)
         {
             auxT = auxT->next;
@@ -40,12 +41,12 @@ void Algorithm(Nodes *nodes_head)
             printf("\n ------------ %d -------------- \n", i);
             ReverseDijkstra(nodes_head, auxT);
             //UpdateTypesCosts(nodes_head);
-            Print_Destinations(nodes_head,fd);
+            //Print_Destinations(nodes_head,fd);
             i++;
         }
     }
 
-    fclose(fd);
+    //fclose(fd);
     return;
 }
 
