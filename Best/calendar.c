@@ -5,6 +5,8 @@
 #include "nodes.h"
 #include "simulation.h"
 
+extern int *costs;
+extern int *types;
 
 extern int Dn;
 

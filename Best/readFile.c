@@ -87,20 +87,19 @@ int main(int argc, char **argv)
     {
         case interactive_sim:
             /*tem que dar como output o tipo e o comprimento da rota entre um destino e uma source dados na funcao commandLineValidation*/
+            //InteractiveMode(nodes_head);
             printf("------------ The simulation has started ------------ \n");
             simulations(nodes_head, event_head);
-            Print_List_of_Destinations(nodes_head, simulation);
-            write_times();
-            write_types_costs_routs(nodes_head, interactive_sim);
-            InteractiveMode(nodes_head);
-
+            printf("------------ The simulation has Ended -------------- \n");
             break;
+
         case simulation:
             printf("------------ The simulation has started ------------ \n");
             simulations(nodes_head, event_head);
-            Print_List_of_Destinations(nodes_head, simulation);
+            printf("------------ The simulation has Ended -------------- \n");
+            //Print_List_of_Destinations(nodes_head, simulation);
             write_times();
-            write_types_costs_routs(nodes_head, simulation);
+            writeStatistics();
             break;
 
         case interactive_algo:
@@ -258,12 +257,12 @@ void writeStatistics(){
 
     costs[0]=0;
        
-    if((fd_t = fopen("types_algorithm.txt","w")) == NULL){
+    if((fd_t = fopen("types.txt","w")) == NULL){
         printf("Error: Could not open file \n");
         exit(0);
     }
 
-    if((fd_c = fopen("costs_algorithm.txt","w")) == NULL){
+    if((fd_c = fopen("costs.txt","w")) == NULL){
         printf("Error: Could not open file \n");
         exit(0);
     }

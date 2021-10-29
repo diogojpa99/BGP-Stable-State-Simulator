@@ -454,27 +454,4 @@ FILE *Print_CCDF(Nodes *nodes_Head, FILE *fd)
     return fd;
 }
 
-void UpdateTypesCosts(Nodes *nodes_head)
-{
 
-    Nodes *nodes_auxT;
-
-    if (nodes_head == NULL){
-        return;
-    }
-    else
-    {
-        for (nodes_auxT = nodes_head; nodes_auxT != NULL; nodes_auxT = nodes_auxT->next)
-        {
-            if (nodes_auxT->destHead->type == INFINITE){
-                types[0] = types[0] + 1;
-            } else {
-                if (nodes_auxT->destHead->type != 0)
-                    types[nodes_auxT->destHead->type] = types[nodes_auxT->destHead->type] + 1;
-                if (nodes_auxT->destHead->cost != 0)
-                    costs[nodes_auxT->destHead->cost] = costs[nodes_auxT->destHead->cost] + 1;
-            }
-        }
-    }
-    return;
-}

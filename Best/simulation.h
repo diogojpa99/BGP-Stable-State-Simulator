@@ -7,4 +7,6 @@
 
 void simulations(Nodes *nodes_head, Event *event_head);
 
+void UpdateTypesCosts(Nodes *nodes_head);
+
 #endif //SIMULATION INCLUDED
