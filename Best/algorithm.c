@@ -177,39 +177,6 @@ Nodes *initReverseDijkstra(Nodes *list_head, Nodes *destiny_node)
     return list_head;
 }
 
-Queue *InsertQ3(Nodes *node, Queue *Q, Queue **last) //Inserir ordenadamente;
-{
-
-    Queue *new_element = NULL, *auxH = NULL, *auxT = NULL;
-
-    new_element = CreateNewElement(new_element, node);
-
-    if (Q == NULL)
-    {
-        Q = new_element;
-        *last=new_element;
-    }
-    else
-    {
-        auxH = Q;
-        auxT = auxH->next;
-        if (new_element->cost <= Q->cost) //Menor ou igual!!
-        {
-            new_element->next = Q;
-            Q = new_element;
-        }else{
-            while ((auxT != NULL) && (new_element->cost > auxT->cost))
-            {
-                auxH = auxT;
-                auxT = auxT->next;
-            }
-            new_element->next = auxT;
-            auxH->next = new_element;
-            if(new_element->next == NULL) *last=new_element;
-        }
-    }
-    return Q;
-}
 
 Queue *CreateNewElement(Queue *new_element, Nodes *node)
 {
@@ -229,19 +196,7 @@ Queue *CreateNewElement(Queue *new_element, Nodes *node)
     return new_element;
 }
 
-/*
-Queue *RemoveNodeFromQ(Queue *Q){
 
-    Queue *auxH=NULL;
-
-    auxH=Q;
-    Q=Q->next;
-
-    free(auxH);
-
-    return Q;
-
-}*/
 
 //Relaxação do link uv
 Queue *Relaxation(Queue *Q, Queue **Q1, Queue **Q2, Queue **Q3,  Queue **last_Q1, Queue **last_Q2, Queue **last_Q3)
@@ -260,18 +215,15 @@ Queue *Relaxation(Queue *Q, Queue **Q1, Queue **Q2, Queue **Q3,  Queue **last_Q1
     else
     {
         if ((Q->node->destHead->type != Q->type) || (Q->node->destHead->cost != Q->cost))
-        { // Deve ser || ou && ?
-            //printf(" This is not going to be processed: Node_id:%d | Type:%d | Cost:%d, because is not the most recent: Node_id:%d | Type:%d | Cost:%d\n", Q->node->id, Q->node->destHead->type, Q->node->destHead->cost,Q->node_id, Q->type,Q->cost);
+        {
             return Q;
         }
         else
         {
             
-            //printf(" This Node is going to be processed: Node_id:%d | Type:%d | Cost:%d\n", Q->node_id, Q->type,Q->cost);
             neighbour = Q->node->adjHead;
             if ((Q->type <= 1 || neighbour->type <= 1) && (neighbour->id != Q->node->destHead->chosen_neighbour_id))
-            { //Acho que faz sentido, mas confirmar
-                //printf(" This Node is going to be relax: Node_id:%d\n", neighbour->id);
+            { 
                 Q = RelaxOfLink(Q, neighbour->node_pointer, neighbour->type, Q1, Q2, Q3, last_Q1, last_Q2, last_Q3);
             }
             while (neighbour->next != NULL)
@@ -279,7 +231,6 @@ Queue *Relaxation(Queue *Q, Queue **Q1, Queue **Q2, Queue **Q3,  Queue **last_Q1
                 neighbour = neighbour->next;
                 if ((Q->type <= 1 || neighbour->type <= 1) && (neighbour->id != Q->node->destHead->chosen_neighbour_id))
                 {
-                    //printf(" This Node is going to be relax: Node_id:%d\n", neighbour->id);
                     Q = RelaxOfLink(Q, neighbour->node_pointer, neighbour->type, Q1, Q2, Q3, last_Q1, last_Q2, last_Q3);
                 }
             }
@@ -362,13 +313,9 @@ void ChooseQ(Queue **Q1, Queue **Q2, Queue **Q3, Nodes *node, int type, Queue **
     }
     else if (type == 3)
     {
-        /*if (flag_type <= 2){
-            //printf("--1--\n");
-            *Q3 = InsertQ3(node, *Q3, last_Q3);
-        } else{*/
-            //printf("--2--\n");
-            *Q3 = InsertInLast(node, *Q3, last_Q3);
-        //}
+        
+        *Q3 = InsertInLast(node, *Q3, last_Q3);
+        
     }
 
     return;

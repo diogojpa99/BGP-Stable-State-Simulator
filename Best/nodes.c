@@ -6,14 +6,14 @@
 extern int nr_nodes;
 extern int *types;
 
-/** createNode: Creates a new node in the Nodes List **/
+/** createGraph: Cria uma lista de adjacencias que traduza o grafo **/
 Nodes *createGraph(Nodes *listHead, int tail, int head, int type){ 
 
     Nodes *newNode = NULL;
     Adj *newAdj = NULL;
     
     
-    if (searchNodesList(listHead, tail) == NULL){ //Deve ser tail ou head ? Perguntar ao prof
+    if (searchNodesList(listHead, tail) == NULL){
         nr_nodes++;
         newNode = createNode(listHead, tail);
         listHead = insertNode(listHead, newNode, newNode->id);    
@@ -28,7 +28,7 @@ Nodes *createGraph(Nodes *listHead, int tail, int head, int type){
     return listHead;
 }
 
-/** Creation of a new node (list of Nodes) **/
+/** createNode: Cria um novo no na lista de nos **/
 Nodes *createNode(Nodes *listHead, int tail){ 
 
     Nodes *newNode = NULL;
@@ -43,12 +43,10 @@ Nodes *createNode(Nodes *listHead, int tail){
     newNode->adjHead = NULL;
     newNode->destHead = NULL;
 
-    //newNode->destHead = createDestiny(newNode->destHead, newNode->id, newNode->id, 0, 0);
-
     return newNode;
 }
 
-/** Creates a new adjacent nodes referent to the Node in the Nodes List **/
+/** createAdj: Cria um novo Creates a new adjacent nodes referent to the Node in the Nodes List **/
 Adj *createAdj(Adj *listHead, int tail, int head, int type){ 
 
     Adj *newAdj;
