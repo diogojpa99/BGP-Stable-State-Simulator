@@ -168,8 +168,8 @@ void commandLineValidation(int argc, char **argv, int *origin_id, int *dest_id)
     }
 
 
-    free(costs);
-    free(types);
+    //free(costs);
+    //free(types);
 
     return;
 }
@@ -236,16 +236,11 @@ Nodes *InteractiveMode(Nodes *nodes_head, Nodes **interactive_orig_node){
             printf("Please insert an integer: "); fflush(stdout);
             fgets(buffer_source, 128, stdin);
         }
-        if ((node = searchNodesList(nodes_head,source_node_id)) == NULL){
-            printf("Sorry but that source node does not exists in this network\n"); 
-            printf("Please insert source node: "); fflush(stdout);
-            if(fgets(buffer_source, 128, stdin)!=NULL){
-                while(sscanf(buffer_source, "%d", &source_node_id)!=1){
-                    printf("Please insert an integer: "); fflush(stdout);
-                    fgets(buffer_source, 128, stdin);
-                }
-            }
-        }
+    }
+
+    if ((node = searchNodesList(nodes_head,source_node_id)) == NULL){
+        printf("Sorry but that node does not exists in this network.\n"); 
+        exit(0);
     }
 
     fflush(stdin);
@@ -257,6 +252,12 @@ Nodes *InteractiveMode(Nodes *nodes_head, Nodes **interactive_orig_node){
             fgets(buffer_dest, 128, stdin);
         }
     }
+
+    if ( searchNodesList(nodes_head,dest_node_id) == NULL){
+        printf("Sorry but that node does not exists in this network.\n"); 
+        exit(0);
+    }
+
 
     dest = searchNodesList(nodes_head,dest_node_id);
     *interactive_orig_node = node;
