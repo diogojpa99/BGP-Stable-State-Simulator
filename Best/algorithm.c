@@ -41,6 +41,7 @@ void Algorithm(Nodes *nodes_head)
             //printf("\n ------------ Awaken node: %d -------------- \n", auxT->id);
             //printf("\n ------------ %d -------------- \n", i);
             ReverseDijkstra(nodes_head, auxT, 0);
+            //printDestiny(auxT->destHead);
             //UpdateTypesCosts(nodes_head);
             //Print_Destinations(nodes_head,fd);
             i++;
