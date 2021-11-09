@@ -229,6 +229,7 @@ int updateEstimateToDestiny(DestNode *current_dest)
 {
     Neighbours *aux = NULL;
     int old_id  = current_dest->chosen_neighbour_id;
+    int old_cost = current_dest->cost;
     //encontrar o melhor vizinho numa lista ordenada por custos
     //devemos dr prioridade aos clientes, depois aos pares e depois aos fornecedores
     if((aux = searchForNeighbourToDestiny(current_dest->neighbours_head, -1, 1)) != NULL){//Encontrámos um vizinho que é nosso cliente
@@ -236,7 +237,7 @@ int updateEstimateToDestiny(DestNode *current_dest)
         current_dest->chosen_neighbour_id = aux->neighbour_id;
         current_dest->cost = aux->neighbour_estim_cost;
         current_dest->type = aux->type;
-        if(current_dest->chosen_neighbour_id != old_id)
+        if(current_dest->chosen_neighbour_id != old_id || current_dest->cost != old_cost)
             return 1;
         
         
@@ -245,7 +246,7 @@ int updateEstimateToDestiny(DestNode *current_dest)
         current_dest->chosen_neighbour_id = aux->neighbour_id;
         current_dest->cost = aux->neighbour_estim_cost;
         current_dest->type = aux->type;
-        if(current_dest->chosen_neighbour_id != old_id)
+        if(current_dest->chosen_neighbour_id != old_id || current_dest->cost != old_cost)
             return 1;
         
     }else if((aux = searchForNeighbourToDestiny(current_dest->neighbours_head, -1, 3)) != NULL){
@@ -253,7 +254,7 @@ int updateEstimateToDestiny(DestNode *current_dest)
         current_dest->chosen_neighbour_id = aux->neighbour_id;
         current_dest->cost = aux->neighbour_estim_cost;
         current_dest->type = aux->type;
-        if(current_dest->chosen_neighbour_id != old_id)
+        if(current_dest->chosen_neighbour_id != old_id || current_dest->cost != old_cost)
             return 1;
         
     }

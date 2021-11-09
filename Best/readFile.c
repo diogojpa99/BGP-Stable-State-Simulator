@@ -111,6 +111,7 @@ int main(int argc, char **argv)
             simulations(nodes_head, event_head);
             write_times();
             writeStatistics();
+            Print_List_of_Destinations(nodes_head, simulation);
             break;
 
         case interactive_algo:
