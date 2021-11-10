@@ -174,15 +174,15 @@ void printEvents(Event *listHead){
     }else{
         auxH = listHead;
         printf("\nEvent: [time %d | %d -> %d | message: %d %d %d ]\n",auxH->An, auxH->origin_node, auxH->dest_node, auxH->message[0], auxH->message[1], auxH->message[2]);
-        //printf("\t[time=%d|%d->%d|Type:%d]->",auxH->An,auxH->origin_node,auxH->dest_node,auxH->type); fflush(stdout);//prompt
+        printf("\t[time=%d|%d->%d|Type:%d]->",auxH->An,auxH->origin_node,auxH->dest_node,auxH->type); fflush(stdout);//prompt
         auxT = listHead->next;
         while( auxT != NULL){
             auxH=auxT;
             auxT=auxT->next;
             printf("\nEvent: [time %d | %d -> %d | message: %d %d %d ]\n",auxH->An, auxH->origin_node, auxH->dest_node, auxH->message[0], auxH->message[1], auxH->message[2]);
-            //printf("\t[time=%d|%d->%d|Type:%d]->",auxH->An,auxH->origin_node,auxH->dest_node,auxH->type); fflush(stdout);//prompt
+            printf("\t[time=%d|%d->%d|Type:%d]->",auxH->An,auxH->origin_node,auxH->dest_node,auxH->type); fflush(stdout);//prompt
         }
-        //printf("NULL\n");
+        printf("NULL\n");
     }
 
     return;
@@ -194,7 +194,7 @@ void processCalendar(Event *event_head, Nodes *woken_node, Nodes *nodes_head)
     
     while(event_head != NULL){
         //printf("\n ----------- 171 -------------- \n");
-        //printEvents(event_head);
+        printEvents(event_head);
         //printf("\n ----------- 171 -------------- \n");
         event_head = processEvent(event_head, event_head->dest_node_pointer, nodes_head);
         event_head = popEvent(event_head);        
